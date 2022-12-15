@@ -28,11 +28,11 @@
 - 回写 write back
 
 ## 1.3 程序开发和执行过程简介
-https://github.com/kechenkristin/csapp/blob/main/note/week1/(1.3)--%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E5%92%8C%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E7%AE%80%E4%BB%8B.pdf
+https://github.com/kechenkristin/csapp/blob/main/note/week1/13.pdf
 
 ## 1.4 计算机系统层次结构
 ### 指令集体系结构(ISA)
-https://github.com/kechenkristin/csapp/blob/main/note/week1/(1.4)--%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.pdf
+https://github.com/kechenkristin/csapp/blob/main/note/week1/14.pdf
 
 ## 1.5 本课程的主要学习内容
 ![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/goal1.png)
