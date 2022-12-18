@@ -40,6 +40,7 @@ https://github.com/kechenkristin/csapp/blob/main/note/week2/slides/22.pdf
 	- modular 运算
 	- 2's complement  
 https://inst.eecs.berkeley.edu/~cs61c/sp22/pdfs/lectures/lec01.pdf  
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/2com.png)
 
 ![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/Cdata.png)
 
@@ -53,6 +54,7 @@ https://inst.eecs.berkeley.edu/~cs61c/sp22/pdfs/lectures/lec01.pdf
 		- 拓展精度浮点
 
 ## 2.3 C语言中的整数
+https://github.com/kechenkristin/csapp/blob/main/note/week2/slides/23.pdf
 - Unsigned Integer
 	- 机器中字的位排列顺序有两种方式
 		- LSB
@@ -68,7 +70,9 @@ https://inst.eecs.berkeley.edu/~cs61c/sp22/pdfs/lectures/lec01.pdf
 		- Two's complement(补码)
 
 ## 2.4 浮点数的编码表示
+https://github.com/kechenkristin/csapp/blob/main/note/week2/slides/24.pdf
 - IEEE754
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/floatNumber.png)
 - 机器数 ===> 真值
 - 真值  ===> 机器数
 - Normalized numbers
@@ -78,11 +82,13 @@ https://inst.eecs.berkeley.edu/~cs61c/sp22/pdfs/lectures/lec01.pdf
 - Denorms
 
 ## 2.5 非数值数据的编码表示
+https://github.com/kechenkristin/csapp/blob/main/note/week2/slides/25.pdf
 - 逻辑数据
 - 西文字符(ASCII)
 - 汉字及国际字符的编码表示
 
 ## 2.6 数据宽度和存储容量的单位
+https://github.com/kechenkristin/csapp/blob/main/note/week2/slides/26.pdf
 - 数据的基本宽度
 	- bit: 处理，存储，传输信息的最小单位
 	- Byte
@@ -97,4 +103,20 @@ https://inst.eecs.berkeley.edu/~cs61c/sp22/pdfs/lectures/lec01.pdf
 	- GB	1GB = 2^30 Byte = 1024MB
 	- TB	1TB = 2^40 Byte = 1024GB
 
+## 2.7 数据存储时的字节排列
+https://github.com/kechenkristin/csapp/blob/main/note/week2/slides/27.pdf
+- 数据的存储和排列顺序
+	- 一个基本数据可能会占用多个存储单元
+eg. int 32 bit = 4 Byte	4个单元
+	- 变量的地址是最小地址
+	- 多个字节在存储单元的存放顺序
+		- 大端(big endian)
+		- 小端(little endian)
+- 检验系统的字节顺序(union)
+- 大端/小端方式举例
 
+## Summary
+- 基本数据类型
+	- 无符号数(二进制位串), 带符号整数(补码)
+	- 浮点数(IEEE 754标准)
+	- 位串，字符串(ASCII码)
