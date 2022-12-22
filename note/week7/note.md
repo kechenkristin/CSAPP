@@ -1,7 +1,8 @@
 ## 过程调用的机器级表示
 
 ### 7.1 
-https://github.com/kechenkristin/csapp/blob/main/note/week7/slides/nju/71.pdf
+https://github.com/kechenkristin/csapp/blob/main/note/week7/slides/nju/71.pdf  
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/07-machine-procedures.pdf  
 - PQ过程 
 
 - IA-32 寄存器使用规定
@@ -29,6 +30,7 @@ movl %esp, %ebp
 		- 具体处理逻辑, 如果遇到函数调用时
 			- 准备参数: 将实参送到栈帧入口参数处
 				- 在被调用函数中，使用**R[ebp]+8, R[ebp]+12, R[ebp]+16**作为有效地址来访问函数的入口参数
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/arguments.png)
 			- CALL指令: 保存返回地址并转被调用函数
 		- 在EAX中准备返回参数
 	- 结束阶段
@@ -40,10 +42,12 @@ movl %esp, %ebp
 	- 按值
 
 - 递归
-	
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/recursion.png)
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/procedureMachine.png)
 
 ### 7.2 选择和循环结构的机器值表示
-https://github.com/kechenkristin/csapp/blob/main/note/week7/slides/nju/72.pdf
+https://github.com/kechenkristin/csapp/blob/main/note/week7/slides/nju/72.pdf  
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/06-machine-control.pdf  
 - if-else
 - switch-case
 - for loop
