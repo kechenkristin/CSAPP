@@ -21,21 +21,20 @@ https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/07-machine-p
 		- 生成栈帧(若需要): sub指令或and指令
 		- 保存现场(如果有被调用者保存寄存器): move指令
 		- 每个过程开始的两条指令
-```
-pushl %ebp
+pushl %ebp  
 movl %esp, %ebp
-```
 	- 过程(函数)体
 		- 分配局部变量空间, 并赋值
 		- 具体处理逻辑, 如果遇到函数调用时
 			- 准备参数: 将实参送到栈帧入口参数处
 				- 在被调用函数中，使用**R[ebp]+8, R[ebp]+12, R[ebp]+16**作为有效地址来访问函数的入口参数
-![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/arguments.png)
 			- CALL指令: 保存返回地址并转被调用函数
 		- 在EAX中准备返回参数
 	- 结束阶段
 		- 退栈: leave指令 或 pop指令
 		- 取返回地址返回: ret指令
+
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/arguments.png)
 
 - 过程调用参数传递举例
 	- 按地址
