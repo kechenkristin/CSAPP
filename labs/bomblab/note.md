@@ -1,3 +1,100 @@
+## code
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include "support.h"
+#include "phases.h"
+
+/* 
+ * Note to self: Remember to erase this file so my victims will have no
+ * idea what is going on, and so they will all blow up in a
+ * spectaculary fiendish explosion. -- Dr. Evil 
+ */
+
+FILE *infile;
+
+int main(int argc, char *argv[])
+{
+    char *input;
+
+    /* Note to self: remember to port this bomb to Windows and put a 
+     * fantastic GUI on it. */
+
+    /* When run with no arguments, the bomb reads its input lines 
+     * from standard input. */
+    if (argc == 1) {
+        infile = stdin;
+    }
+
+    /* When run with one argument <file>, the bomb reads from <file> 
+     * until EOF, and then switches to standard input. Thus, as you 
+     * defuse each phase, you can add its defusing string to <file> and
+     * avoid having to retype it. */
+    else if (argc == 2) {
+        if (!(infile = fopen(argv[1], "r"))) {
+            printf("%s: Error: Couldn't open %s\n", argv[0], argv[1]);
+            exit(8);
+        }
+    }
+
+    /* You can't call the bomb with more than 1 command line argument. */
+    else {
+        printf("Usage: %s [<input_file>]\n", argv[0]);
+        exit(8);
+    }
+/* Do all sorts of secret stuff that makes the bomb harder to defuse. */
+    initialize_bomb();
+
+    printf("Welcome to my fiendish little bomb. You have 6 phases with\n");
+    printf("which to blow yourself up. Have a nice day!\n");
+
+    /* Hmm...  Six phases must be more secure than one phase! */
+    input = read_line();             /* Get input                   */
+    phase_1(input);                  /* Run the phase               */
+    phase_defused();                 /* Drat!  They figured it out!
+                                      * Let me know how they did it. */
+    printf("Phase 1 defused. How about the next one?\n");
+
+    /* The second phase is harder.  No one will ever figure out
+     * how to defuse this... */
+    input = read_line();
+    phase_2(input);
+    phase_defused();
+    printf("That's number 2.  Keep going!\n");
+
+    /* I guess this is too easy so far.  Some more complex code will
+     * confuse people. */
+    input = read_line();
+    phase_3(input);
+    phase_defused();
+    printf("Halfway there!\n");
+
+    /* Oh yeah?  Well, how good is your math?  Try on this saucy problem! */
+    input = read_line();
+    phase_4(input);
+    phase_defused();
+    printf("So you got that one.  Try this one.\n");
+
+    /* Round and 'round in memory we go, where we stop, the bomb blows! */
+    input = read_line();
+    phase_5(input);
+    phase_defused();
+    printf("Good work!  On to the next...\n");
+
+    /* This phase will never be used, since no one will get past the
+     * earlier ones.  But just in case, make this one extra hard. */
+    input = read_line();
+    phase_6(input);
+    phase_defused();
+    /* Wow, they got it!  But isn't something... missing?  Perhaps
+     * something they overlooked?  Mua ha ha ha ha! */
+
+    return 0;
+}
+```
+
+## exercise
+
 > objdump -S bomb
 > (gdb) disas function_name
 
@@ -111,9 +208,41 @@ Dump of assembler code for function phase_2:
    0x0000000000400f42 <+70>:	ret    
 End of assembler dump.
 ```
+
+#### log
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/lab2p32.png)
+	
+
+#### ans
 1, 2, 4, 8, 16, 32
 
 ### phase_3
+#### res
+- 一些用到的gdb指令
+
+运行单条机器指令
+> (gdb) stepi
+
+在单条机器指令处打断点
+```
+(gdb) b *(xxxxxxx)
+```
+
+打断正在执行的函数
+> (gdb) finish
+
+查看某个立即数
+> (gdb) p 0x111
+
+- imgs
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/switch.png)
+
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/arguments.png)
+
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/lab2p31.png)
+
+
+
 #### codes
 ```asm
 Dump of assembler code for function phase_3:
@@ -156,3 +285,99 @@ Dump of assembler code for function phase_3:
 End of assembler dump.
 ```
 
+#### log
+
+```shell
+kristin@kristin-PC:~/study/csapp/labs/bomblab/bomb$ cat ans.txt 
+Border relations with Canada have never been better.
+1 2 4 8 16 32
+test
+```
+
+```shell
+(gdb) b phase_3
+Breakpoint 1 at 0x400f43
+(gdb) run ans.txt 
+Starting program: /home/kristin/study/csapp/labs/bomblab/bomb/bomb ans.txt
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+
+Breakpoint 1, 0x0000000000400f43 in phase_3 ()
+(gdb) stepi
+0x0000000000400f47 in phase_3 ()
+(gdb) 
+0x0000000000400f4c in phase_3 ()
+(gdb) 
+0x0000000000400f51 in phase_3 ()
+(gdb) 
+0x0000000000400f56 in phase_3 ()
+(gdb) 
+0x0000000000400f5b in phase_3 ()
+(gdb) 
+0x0000000000400bf0 in __isoc99_sscanf@plt ()
+(gdb) 
+__GI___isoc99_sscanf (s=0x603820 <input_strings+160> "test", format=0x4025cf "%d %d") at ./stdio-common/isoc99_sscanf.c:24
+24	./stdio-common/isoc99_sscanf.c: No such file or directory.
+(gdb) 
+0x00007ffff7de42d4	24	in ./stdio-common/isoc99_sscanf.c
+(gdb) finish
+Run till exit from #0  0x00007ffff7de42d4 in __GI___isoc99_sscanf (
+    s=0x603820 <input_strings+160> "test", format=0x4025cf "%d %d")
+    at ./stdio-common/isoc99_sscanf.c:24
+0x0000000000400f60 in phase_3 ()
+Value returned is $1 = 0
+```
+
+根据1及 gdb format=0x4025cf "%d %d" 可知，该 phase需要两个int  
+根据参数的入口地址相关知识可知, 第一个参数存放在0x8(%rsp), 第二个参数存放在0xc(%rsp)  
+根据2可知，第一个参数在1和7之间(1, 7)  
+更改ans.txt  
+
+```shell
+kristin@kristin-PC:~/study/csapp/labs/bomblab/bomb$ cat ans.txt 
+Border relations with Canada have never been better.
+1 2 4 8 16 32
+2 999
+```
+
+根据3及多个跳转指令可知，这是一个swithch-case结构, 根据第一个参数的值对第二个参数会有不同的指派  
+
+- 当第一个参数为2时
+```shell
+(gdb) b *0x0000000000400f75
+Breakpoint 1 at 0x400f75
+(gdb) r ans.txt 
+Starting program: /home/kristin/study/csapp/labs/bomblab/bomb/bomb ans.txt
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+
+Breakpoint 1, 0x0000000000400f75 in phase_3 ()
+(gdb) stepi
+0x0000000000400f83 in phase_3 ()	
+// 0x0000000000400f83 <+64>:    mov    $0x2c3,%eax
+(gdb) p 0x2c3
+$1 = 707
+```
+
+- 当第一个参数为3时
+```shell
+Breakpoint 1, 0x0000000000400f75 in phase_3 ()
+(gdb) stepi
+0x0000000000400f8a in phase_3 ()	
+//  0x0000000000400f8a <+71>:    mov    $0x100,%eax
+(gdb) p 0x100
+$1 = 256
+```
+
+- ps registers
+	- eax/rax: 0<+19> ===> first arg<+46> ===> 根据第一个参数所赋的第二个参数的值<+57 ~ +118>
+	- 0x8(%rsp): first arg
+	- 0xc(%rsp): second arg
