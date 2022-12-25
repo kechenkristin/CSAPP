@@ -5,7 +5,7 @@
 
 #### code
 ##### phase_1
-```
+```asm
 0000000000400ee0 <phase_1>:
   400ee0:	48 83 ec 08          	sub    $0x8,%rsp	// 设置栈帧
   400ee4:	be 00 24 40 00       	mov    $0x402400,%esi	// 将立即数$0x402400存入%esi寄存器
@@ -18,7 +18,7 @@
 ```
 
 ##### string_not_equal
-```
+```asm
 0000000000401338 <strings_not_equal>:
   401338:	41 54                	push   %r12
   40133a:	55                   	push   %rbp
@@ -32,7 +32,7 @@
 ```
 
 ##### string_length
-```
+```asm
 000000000040131b <string_length>:
   40131b:	80 3f 00             	cmpb   $0x0,(%rdi)
   40131e:	74 12                	je     401332 <string_length+0x17>
@@ -57,7 +57,7 @@
 
 ##### read_six_numbers
 > (gdb) disas read_six_numbers
-```
+```asm
 Dump of assembler code for function read_six_numbers:
    0x000000000040145c <+0>:	sub    $0x18,%rsp
    0x0000000000401460 <+4>:	mov    %rsi,%rdx
@@ -82,7 +82,7 @@ End of assembler dump.
 
 > (gdb) disas phase_2
 
-```
+```asm
 Dump of assembler code for function phase_2:
    0x0000000000400efc <+0>:	push   %rbp
    0x0000000000400efd <+1>:	push   %rbx
@@ -115,7 +115,7 @@ End of assembler dump.
 
 ### phase_3
 #### codes
-```
+```asm
 Dump of assembler code for function phase_3:
    0x0000000000400f43 <+0>:	sub    $0x18,%rsp
    0x0000000000400f47 <+4>:	lea    0xc(%rsp),%rcx
