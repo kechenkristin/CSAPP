@@ -415,16 +415,16 @@ End of assembler dump.
 ```asm
 (gdb) disas func4
 Dump of assembler code for function func4:
-   0x0000000000400fce <+0>:	sub    $0x8,%rsp
-   0x0000000000400fd2 <+4>:	mov    %edx,%eax
-   0x0000000000400fd4 <+6>:	sub    %esi,%eax
-   0x0000000000400fd6 <+8>:	mov    %eax,%ecx
-   0x0000000000400fd8 <+10>:	shr    $0x1f,%ecx
-   0x0000000000400fdb <+13>:	add    %ecx,%eax
-   0x0000000000400fdd <+15>:	sar    %eax
-   0x0000000000400fdf <+17>:	lea    (%rax,%rsi,1),%ecx
-   0x0000000000400fe2 <+20>:	cmp    %edi,%ecx
-   0x0000000000400fe4 <+22>:	jle    0x400ff2 <func4+36>
+   0x0000000000400fce <+0>:	sub    $0x8,%rsp	
+   0x0000000000400fd2 <+4>:	mov    %edx,%eax	// R[eax] = R[edx] = $0xe = 14
+   0x0000000000400fd4 <+6>:	sub    %esi,%eax	// R[eax] = R[eax] - R[esi] = 14 - 0 = 14
+   0x0000000000400fd6 <+8>:	mov    %eax,%ecx	// R[ecx] = R[eax] = 14
+   0x0000000000400fd8 <+10>:	shr    $0x1f,%ecx	// 对R[ecx]的值逻辑右移31位
+   0x0000000000400fdb <+13>:	add    %ecx,%eax	// R[eax] = R[eax] + R[ecx]
+   0x0000000000400fdd <+15>:	sar    %eax		// R[eax] = R[eax] >> 1 = 7
+   0x0000000000400fdf <+17>:	lea    (%rax,%rsi,1),%ecx	// R[ecx] = R[rax] + R[rsi] = 7 + 0 = 7
+   0x0000000000400fe2 <+20>:	cmp    %edi,%ecx	// R[edi]存放第一个参数a
+   0x0000000000400fe4 <+22>:	jle    0x400ff2 <func4+36>	// 若a<7则跳转
    0x0000000000400fe6 <+24>:	lea    -0x1(%rcx),%edx
    0x0000000000400fe9 <+27>:	call   0x400fce <func4>
    0x0000000000400fee <+32>:	add    %eax,%eax
