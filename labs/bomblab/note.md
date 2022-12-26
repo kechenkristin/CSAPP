@@ -210,7 +210,14 @@ End of assembler dump.
 ```
 
 #### log
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/lab2p2.png)
 ![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/lab2p32.png)
+1. 准备栈帧
+2. 调用read_six_number函数,注意参数的摆放位置  
+	- R[rsp] arg1, R[rsp]+4 arg2, R[rsp]+8 arg3 etc
+3. 易知第一个参数是1
+4. R[rbx]存放下一个参数的值, R[rbp]存放跳出循环的临界值 
+5. (important), 该处就是更新的核心逻辑, 2*上一个参数
 	
 
 #### ans
@@ -412,9 +419,6 @@ Dump of assembler code for function phase_4:
 End of assembler dump.
 ```
 
-R[edx] = $0xe = 14  
-R[esi] = $0x0 = 0  
-R[edi] = M[R[rsp]+0x8] = 第一个参数a  
 
 
 ```asm
@@ -444,6 +448,8 @@ Dump of assembler code for function func4:
    0x000000000040100b <+61>:	ret    
 End of assembler dump.
 ```
+
+#### log
 
 ```
 (gdb) b phase_4
@@ -481,5 +487,36 @@ Run till exit from #0  __GI___isoc99_sscanf (
 0x0000000000401029 in phase_4 ()
 Value returned is $1 = 0
 ```
+##### phase_4
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/lab2p41.png)
+1. 该phase需要两个int
+- R[rsp] + 0x8 存放第一个参数
+- R[rsp] + 0xc 存放第二个参数
+2. R[eax] != 2
+3. 第一个参数(R[rsp]+8) < 0xe(14)
+4. 调用fun4之前寄存器中存储的值 
+- R[edx] = $0xe = 14  
+- R[esi] = $0x0 = 0  
+- R[edi] = M[R[rsp]+0x8] = 第一个参数a  
+5. 易知第二个参数是0
 
+##### func4
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/lab2p42.png)
+该段code是一段递归调用  
+<+0>-<+17> 处设置了一些寄存器的值  
+根据注释可知，临界值为7，故第一个参数是7
 
+```shell
+kristin@kristin-PC:~/study/csapp/labs/bomblab/bomb$ cat ans.txt 
+Border relations with Canada have never been better.
+1 2 4 8 16 32
+3 256
+7 0
+kristin@kristin-PC:~/study/csapp/labs/bomblab/bomb$ bomb ans.txt 
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+Halfway there!
+So you got that one.  Try this one.
+```
