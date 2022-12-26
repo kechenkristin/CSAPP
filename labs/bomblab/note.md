@@ -411,3 +411,70 @@ Dump of assembler code for function phase_4:
    0x0000000000401061 <+85>:	ret    
 End of assembler dump.
 ```
+
+```asm
+(gdb) disas func4
+Dump of assembler code for function func4:
+   0x0000000000400fce <+0>:	sub    $0x8,%rsp
+   0x0000000000400fd2 <+4>:	mov    %edx,%eax
+   0x0000000000400fd4 <+6>:	sub    %esi,%eax
+   0x0000000000400fd6 <+8>:	mov    %eax,%ecx
+   0x0000000000400fd8 <+10>:	shr    $0x1f,%ecx
+   0x0000000000400fdb <+13>:	add    %ecx,%eax
+   0x0000000000400fdd <+15>:	sar    %eax
+   0x0000000000400fdf <+17>:	lea    (%rax,%rsi,1),%ecx
+   0x0000000000400fe2 <+20>:	cmp    %edi,%ecx
+   0x0000000000400fe4 <+22>:	jle    0x400ff2 <func4+36>
+   0x0000000000400fe6 <+24>:	lea    -0x1(%rcx),%edx
+   0x0000000000400fe9 <+27>:	call   0x400fce <func4>
+   0x0000000000400fee <+32>:	add    %eax,%eax
+   0x0000000000400ff0 <+34>:	jmp    0x401007 <func4+57>
+   0x0000000000400ff2 <+36>:	mov    $0x0,%eax
+   0x0000000000400ff7 <+41>:	cmp    %edi,%ecx
+   0x0000000000400ff9 <+43>:	jge    0x401007 <func4+57>
+   0x0000000000400ffb <+45>:	lea    0x1(%rcx),%esi
+   0x0000000000400ffe <+48>:	call   0x400fce <func4>
+   0x0000000000401003 <+53>:	lea    0x1(%rax,%rax,1),%eax
+   0x0000000000401007 <+57>:	add    $0x8,%rsp
+   0x000000000040100b <+61>:	ret    
+End of assembler dump.
+```
+
+```
+(gdb) b phase_4
+Breakpoint 1 at 0x40100c
+(gdb) r ans.txt 
+Starting program: /home/kristin/study/csapp/labs/bomblab/bomb/bomb ans.txt
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+Halfway there!
+
+Breakpoint 1, 0x000000000040100c in phase_4 ()
+(gdb) stepi
+0x0000000000401010 in phase_4 ()
+(gdb) 
+0x0000000000401015 in phase_4 ()
+(gdb) 
+0x000000000040101a in phase_4 ()
+(gdb) 
+0x000000000040101f in phase_4 ()
+(gdb) 
+0x0000000000401024 in phase_4 ()
+(gdb) 
+0x0000000000400bf0 in __isoc99_sscanf@plt ()
+(gdb) 
+__GI___isoc99_sscanf (s=0x603870 <input_strings+240> "test", format=0x4025cf "%d %d") at ./stdio-common/isoc99_sscanf.c:24
+24	./stdio-common/isoc99_sscanf.c: No such file or directory.
+(gdb) finish
+Run till exit from #0  __GI___isoc99_sscanf (
+    s=0x603870 <input_strings+240> "test", format=0x4025cf "%d %d")
+    at ./stdio-common/isoc99_sscanf.c:24
+0x0000000000401029 in phase_4 ()
+Value returned is $1 = 0
+```
+
+
