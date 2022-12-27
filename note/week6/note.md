@@ -20,6 +20,11 @@ https://github.com/kechenkristin/csapp/blob/main/note/week6/slides/nju/61.pdf
 		- lea
 - 输入输出指令 in/out
 - 标志传送指令
+- cf mov/lea
+	- lea 加载地址
+	- mov 加载这个地址在内存里的值
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/arrayaddress.png)
+
 
 ### 6.2 定点算术运算指令
 https://github.com/kechenkristin/csapp/blob/main/note/week6/slides/nju/62.pdf
