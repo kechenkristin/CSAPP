@@ -570,3 +570,59 @@ Dump of assembler code for function phase_5:
    0x00000000004010f3 <+145>:	ret    
 End of assembler dump.
 ```
+
+#### log
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/lab2p51.png)
+
+1. (黄色块) 该处代码是金丝雀
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/canary1.png)
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/canary2.png)
+
+2. (淡蓝块) 该代码调用string_length函数，易知答案所需的字符串长度必然为6, 跳转到<+112>处，在+112处重置rax寄存器的值为0, 跳转到<+41>
+
+3. 先看5
+(引用自知乎)  
+https://zhuanlan.zhihu.com/p/339575162  
+```
+func (char *c ,int rax, int 1){ //初始rax=0
+    long a=c[rax*1] //这里会把a的高32位置0 
+    char tmp=byte(a)[0:8]//这里把a的2进制表示的低八位给tmp
+    //注意(rsp)=tmp tmp就是我们输入的第一个字符
+    long rdx=tmp;
+    edx=edx&0xf //也就是我们只保存后4位
+    edx=m[0x4024b0+rdx] //这里的rdx里保存的就是我们输入的第一个字符
+    (rsp+10+rax)=edx   //低8位
+    func(c,rax+1,1);  //然后循环调用    
+}
+```
+
+```shell
+(gdb) x/s 0x4024b0
+0x4024b0 <array.3449>:	"maduiersnfotvbylSo you think you can stop the bomb with ctrl-c, do you?"
+```
+
+or 
+
+```shell
+(gdb) p (char*)0x4024b0
+$2 = 0x4024b0 <array> "maduiersnfotvbylSo you think you can stop the bomb with ctrl-c, do you?"
+```
+
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/lab2p52.png)
+
+f - 9  
+0101  
++ 64   
+-----  
+0100 0101  
+I - 73  
+
+4. 循环调用
+
+5. 把rsp+0x10处的值和0x40245e处的值比较 
+```shell
+(gdb) x/s 0x40245e
+0x40245e:	"flyers"
+```
+
+6. 最后比较金丝雀如果没有缓冲区溢出则返回
