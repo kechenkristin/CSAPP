@@ -1,4 +1,5 @@
-## 10.1 可执行文件生成概述
+### 10.1 可执行文件生成概述
+https://github.com/kechenkristin/csapp/blob/main/note/week10/slides/10.1.pdf
 - 程序的转换处理过程
 	- 预处理
 	- 编译
@@ -24,6 +25,7 @@
 
 
 ### 10.2 目标文件格式概述
+https://github.com/kechenkristin/csapp/blob/main/note/week10/slides/10.2.pdf
 - recap 源程序 ===> 可重定位目标文件 ===> 可执行目标文件
 
 - 链接操作的步骤
@@ -56,6 +58,9 @@ objdump -d test
 		- Linux: ELF
 
 ### 10.3 ELF(Executable and Linkable Format)
+https://github.com/kechenkristin/csapp/blob/main/note/week10/slides/10.3.pdf
 - 链接视图（被链接）：可重定位目标文件 (Relocatable object files)
 
 - 执行视图（被执行）：可执行目标文件（Executable object files）
+
+https://github.com/kechenkristin/csapp/blob/main/note/week10/slides/10.4.pdf
