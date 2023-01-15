@@ -21,6 +21,8 @@ printf("au=%u, bu=%u, cu=%u \n", au, bu, cu);
 		- IEEE754 (符号阶码尾数)
 
 ### 3.7.2 数据的宽度与存储
+https://github.com/kechenkristin/csapp/blob/main/note/week2/practical/372.pdf
+
 - 数据存储的宽度
 [!avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/Cdata.png)
 
@@ -29,6 +31,8 @@ printf("au=%u, bu=%u, cu=%u \n", au, bu, cu);
 - 数据存储的对齐方式
 
 ### 3.7.3 数据类型的转换
+https://github.com/kechenkristin/csapp/blob/main/note/week2/practical/373.pdf
+
 - 整数之间的数据类型转换
 C语言中, 整数的赋值不是在真值上复制，而是在机器数上的赋值
 设a有n位, b有m位, b = a
@@ -40,4 +44,6 @@ C语言中, 整数的赋值不是在真值上复制，而是在机器数上的�
 
 ### 3.7.4 整数加减运算
 
+
 ### 3.7.5 浮点数的表示与运算(important 看slides)
+https://github.com/kechenkristin/csapp/blob/main/note/week2/practical/375.pdf
