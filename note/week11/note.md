@@ -11,7 +11,7 @@ https://github.com/kechenkristin/csapp/blob/main/note/week11/slides/11.1.pdf
 	- 变量名：静态数据区
 - 定义符号的值：其目标所在的首地址
 
-[!avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/w11p1.png)
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/w11p1.png)
 
 ### 链接符号的类型
 - Global symbols
@@ -19,7 +19,7 @@ https://github.com/kechenkristin/csapp/blob/main/note/week11/slides/11.1.pdf
 - Local symbols(static)
 
 ### 目标文件中的符号表
-[!avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/w11p2.png)
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/w11p2.png)
 
 ### 符号解析(Symbol Resolution)+
 - 目的：将每个模块**引用的符号**与某个目标模块中的**定义符号**建立关联
@@ -53,9 +53,9 @@ https://github.com/kechenkristin/csapp/blob/main/note/week11/slides/11.2.pdf
 	- libm.a
 
 - 静态库的创建
-[!avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/w11p3.png)
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/w11p3.png)
 
-[!avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/w11p4.png)
+![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/w11p4.png)
 
 ### 链接器中符号解析的全过程(important, slides)
 **UDE**
