@@ -1,4 +1,6 @@
 ## GDB
+### res
+https://inst.eecs.berkeley.edu/~cs61c/sp22/labs/lab01/
 
 ### man gdb
 Here are some of the most frequently needed GDB commands:
