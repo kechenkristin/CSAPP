@@ -37,6 +37,17 @@ objdump -d test.o
 	- relationship between ISA and MicroArchitecture(Organization)
 	ISA是计算机组成的抽象
 
+- Summary
+	- 高级语言程序总是转换为机器代码才能在机器上执行  
+	- 转换过程:预处理、编译、汇编、链接  
+	- 机器代码是二进制代码,可DUMP为汇编代码表示  
+	- ISA规定了一台机器的指令系统涉及到的所有方面  
+		– 所有指令的指令格式、功能
+		– 通用寄存器的个数、位数、编号和功能
+		– 存储地址空间大小、编址方式、大/小端
+		– 指令寻址方式
+
+
 ## 5.2
 
 ![avatar](https://github.com/kechenkristin/imagesGitHub/blob/main/notes/csapp/address.png)
